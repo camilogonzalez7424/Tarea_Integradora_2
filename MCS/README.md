@@ -1,4 +1,5 @@
-![](apple-music-2020-portada](https://user-images.githubusercontent.com/69222739/95393199-c6ae0080-08bf-11eb-96da-355de61463c3.jpg)
+![](https://user-images.githubusercontent.com/69222739/95393199-c6ae0080-08bf-11eb-96da-355de61463c3.jpg)
+
 # Integrative Task 2 by Camilo González Velasco
 ## APO I
 

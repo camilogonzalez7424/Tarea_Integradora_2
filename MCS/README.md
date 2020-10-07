@@ -1,5 +1,7 @@
 ![](https://user-images.githubusercontent.com/69222739/95393199-c6ae0080-08bf-11eb-96da-355de61463c3.jpg)
 
+Imagen Tomada de: https://www.google.com/search?q=music&sxsrf=ALeKk03-0cVsLnh1qdV4TEPARXCsQu_2aQ:1602108886161&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiv9LPYwKPsAhUtpFkKHWtZAUgQ_AUoAXoECA0QAw&biw=1366&bih=547#imgrc=TFaYhsQnuyOq1M
+
 # Integrative Task 2 by Camilo González Velasco
 ## APO I
 
@@ -11,13 +13,13 @@ Inicialmente, el equipo de desarrollo decidió bautizar la aplicación: el **Mus
 
 El Music Collect & Share tiene varios usuarios registrados, un pool de canciones compartidas y una colección de playlists.  Cada usuario tiene un apodo o nombre de usuario que es una sola palabra, sin espacios.  Por ejemplo, lunalunera, djchristian y seyerman son nombres de usuarios de la aplicación. Todos los usuarios tienen además una contraseña, una edad y una categoría.  La categoría de un usuario  puede ser, newbie, little contributor, mild contributor y star contributor, la categoría de un usuario  se asigna dependiendo de la cantidad de canciones que han compartido en el pool de canciones así:
   
-**-** Un usuario está en la categoría newbie cuando está recién creado y hasta que comparte tres canciones.
+- Un usuario está en la categoría newbie cuando está recién creado y hasta que comparte tres canciones.
 
-**-** A partir de tres canciones compartidas, un usuario se convierte en  little contributor hasta que comparta diez canciones.
+- A partir de tres canciones compartidas, un usuario se convierte en  little contributor hasta que comparta diez canciones.
 
-**-** Cuando un usuario comparte diez canciones se convierte en usuario mild contributor  y conserva esta categoría hasta que comparte 30 canciones.
+- Cuando un usuario comparte diez canciones se convierte en usuario mild contributor  y conserva esta categoría hasta que comparte 30 canciones.
 
-**-** A partir de las 30 canciones compartidas, el usuario está en la categoría star contributor
+- A partir de las 30 canciones compartidas, el usuario está en la categoría star contributor
 
 Cada canción en el pool de canciones del **MCS** tiene un título, un nombre de artista o banda, una fecha de lanzamiento, una duración y un género. El género se refiere al género musical, aunque existen diversos  géneros musicales, usted y sus compañeros decidieron limitar los géneros de las canciones del **MCS** a rock, hip hop, música clásica, reggae, salsa y metal.  
 
@@ -35,6 +37,7 @@ Los playlist tienen tres variantes: playlists privados, restringidos y públicos
 - Un playlist privado tiene un único usuario que puede añadir y listar las canciones que contiene.
 - Un playlist restringido tiene un máximo de cinco usuarios que pueden añadir y listar canciones.
 - Un playlist público no tiene restricciones de usuarios, es abierto para todos, pero tiene una calificación promedio, porque cualquier usuario puede ingresar una calificación entre 1  y 5 indicando qué tanto le gustó el playlist (1 la nota más baja, 5 la nota más alta)
+
 
 ### Autor
 

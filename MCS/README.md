@@ -3,6 +3,9 @@
 Imagen Tomada de:[Link](https://www.google.com/search?q=music&sxsrf=ALeKk03-0cVsLnh1qdV4TEPARXCsQu_2aQ:1602108886161&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiv9LPYwKPsAhUtpFkKHWtZAUgQ_AUoAXoECA0QAw&biw=1366&bih=547#imgrc=TFaYhsQnuyOq1M)
 
 # Integrative Task 2 by Camilo González Velasco
+
+![WhatsApp Image 2020-10-18 at 7 36 51 PM](https://user-images.githubusercontent.com/69222739/96600243-5be4c800-12b6-11eb-85ac-d07fc8cd7e39.jpeg)
+
 ## APO I
 
 ### Enunciado: 

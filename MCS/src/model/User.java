@@ -12,11 +12,11 @@ public class User{
     
     private Category type;
 
-    public User(String userName, String password, int age, String type){
+    public User(String userName, String password, int age){
         this.userName = userName;
         this.password = password;
         this.age = age;
-        this.type = Category.valueOf(type); //Arreglar esto
+       // this.type = Category.valueOf(type); Arreglar esto
 
     }
 

@@ -12,12 +12,12 @@ public class Song{
     private Time durationTime;
     private Genre songGenre;
 
-    public Song(String title, String band,String date, Time durationTime, Genre songGenre) {
+    public Song(String title, String band,String date, Time durationTime, String songGenre) {
         this.title = title;
         this.band = band;
         this.date = date;
         this.durationTime = durationTime;
-        this.songGenre = songGenre;
+        this.songGenre = Genre.valueOf(songGenre);
     }
 
     /** 

@@ -7,6 +7,7 @@ public class User{
     private String userName;
     private String password;
     private int age;
+    private int shareSong;
 
     //Relationship
     
@@ -16,15 +17,30 @@ public class User{
         this.userName = userName;
         this.password = password;
         this.age = age;
+        this.shareSong=shareSong;
         this.type = Category.NEWBIE; 
 
     }
 
+    //actualiza la categoria de un usuario
+   public void setCategory(int shareSong){
+        if(shareSong>=3){
+            this.type= Category.LITTLE_CONTRIBUTOR;
+        }
+        if(shareSong>=10){
+            this.type= Category.MILD_CONTRIBUTOR;
+        }
+
+        if(shareSong>=30){
+            this.type= Category.STAR_CONTRIBUTOR;
+        }
+    }
     
     /** 
      * @return String
      */
-    //Getters 
+  
+     //Getters 
 
     public String getUserName() {
         return userName;
@@ -48,7 +64,8 @@ public class User{
          /** 
           * @param userName
           */
-         //Setters
+      
+          //Setters
 
     public void setUserName(String userName){
         this.userName = userName;
@@ -71,6 +88,14 @@ public class User{
         this.age = age;
     }
 
+    public int getShareSong(){
+       return shareSong;
+    }
+
+    public void setShareSong(int shareSong){
+        this.shareSong = shareSong;
+    }
+
     
     /** 
      * @return String
@@ -79,7 +104,8 @@ public class User{
 		return "****** User ******\n"+
 		"UserName: "+ userName + "\n"+
 		"Age: "+ age + "\n"+
-		"Category: "+ type + "\n";
+        "Category: "+ type + "\n"+
+        "******************\n";
 	}
 
 

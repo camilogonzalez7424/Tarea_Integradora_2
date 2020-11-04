@@ -14,7 +14,9 @@ public class Main {
 		reader = new Scanner(System.in);
 	}
 	public static void main(String [] args) {
-		
+		System.out.println("************************");
+		System.out.println("***  Welcome to MCS  ***");
+		System.out.println("************************");
 		System.out.println("Iniciando la aplicación");
 		
 		Main ppal= new Main();
@@ -33,11 +35,14 @@ public class Main {
 		int option=0;
 
 		System.out.println(
-				"Menú principal, seleccione una opción\n" +
+				"Menú principal, seleccione la opción que guste\n" +
 				"(1) Para crear un usuario \n" +
 				"(2) Para mostrar los usuarios\n"+
 				"(3) Para agregar las canciones\n"+
 				"(4) Para mostrar las canciones\n" +  
+				"(5) Para crear playlist\n"+
+				"(6) Para agregar canciones a la playlist\n"+
+				"(7) Para mostrar las playlist\n"+
 				"(0) Para salir"
 				);
 		option= reader.nextInt();
@@ -65,7 +70,12 @@ public class Main {
 		case 4:
 			System.out.println(mcs.showSong());
 			break;
-		
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;			
 		default:
 			System.out.println("Error, opción no válida");
 		
@@ -117,7 +127,7 @@ public class Main {
 			minute = reader.nextInt();
 			System.out.println("Ingrese segundos:");
 			second = reader.nextInt();
-			System.out.println("Seleccione el numero que respresenta el genero de la canción\n"+
+			System.out.println("Seleccione el número que respresenta el genero de la canción\n"+
 				"*******************Genere******************** \n"+
 				"(1) Si la canción es de ROCK\n"+
 				"(2) Si la canción es de HIP HOP\n"+
@@ -153,9 +163,19 @@ public class Main {
 		
 			default: 
 			System.out.println("Error");
-		}		  	
 
-			mcs.addSongToPool(title, band, date, minute, second, songGenre);					  
+		}
+
+			mcs.addSongToPool(title, band, date, minute, second, songGenre);	
+			
+			reader.nextLine();
+			String name = "";
+			int shareSong = 0;
+
+			System.out.println("Ingrese el nombre del usuario que añade la canción compartida");
+			name = reader.nextLine();
+			
+			mcs.updateRank(name, shareSong);
 			System.out.println("La canción \""+ title +"\" ha sido añadida con éxito\n");
 		}
 		else{
@@ -163,5 +183,44 @@ public class Main {
 		}
 	
 	}
+
+	private void createPlaylist(){
+		int length, numplay;
+		String name;
+		String [] restricted=new String[5];
+		double score =0;
+		System.out.println("Digite la información de la playlist, por favor");
+		System.out.println("Escriba el nombre de la playlist");
+		name = reader.nextLine();
+		System.out.println("Seleccione el número que respresenta el tipo de playlist\n"+
+		"*******************Playlist tipo:******************** \n"+
+		"(1) Si la playlist es privada\n");
+		numplay = reader.nextInt();
+		reader.nextLine(); 
+		switch(numplay) {
+		case 1:
+			//System.out.println("Usuario que la crea");
+			//String nameprivate = reader.nextLine();
+			mcs.createPlaylist(name);
+			break;
+		case 2:
+		
+		mcs.createPlaylist(name, score);
+			
+			break;
+		case 3:
+			/*String[] resuser = new String[5];
+			for(int i = 0; i<5; i++){
+				System.out.println("Write user name");
+				String namerestricted = reader.nextLine();
+			}
+			mcs.createPlaylist(name, creatorUser);;
+			*/
+			break;
+		default:
+			System.out.println("Error, opción no válida");
+		}
+	}
+
 		}
 	

@@ -1,20 +1,23 @@
 package model;
 
 public class Mcs{
-    public final static int MAX_POOL_SONG = 30;
-    public final static int MAX_USER = 10;
-    public final static int MAX_PLAYLIST = 20;
-    private User[] user;
-    private Song[] poolSong;
-   // private Playlist[] playlistSong;
-   private int numUsers;   
-   private int numSong; 
+    public final static int MAX_USER = 10; //Constant maximo de usuarios.
+    public final static int MAX_POOL_SONG = 30; //Constant maximo de canciones.
+    public final static int MAX_PLAYLIST = 20; //Constant maximo de playlist.
+
+    private User[] user; //Array de usuario.
+    private Song[] poolSong; //Array de canciones.
+    private Playlist[] playlistSong; //Array de playlist.
+
+   private int numUsers;  //Variable para validar el maximo de usuarios. 
+   private int numSong;  //Variable para validar el maximo de canciones.
+   private int numPlaylist; //Variable para validar el maximo de playlist.
 
     public Mcs(){
 
         user = new User[MAX_USER];
         poolSong = new Song[MAX_POOL_SONG];
-       // playlistSong = new Playlist[MAX_PLAYLIST];
+        playlistSong = new Playlist[MAX_PLAYLIST];
        numUsers = 0;
        numSong = 0;
         }
@@ -60,9 +63,8 @@ public class Mcs{
              return numSong < MAX_POOL_SONG;
             }
 
-    public void addSongToPool(String title, String band,String date, int minute,int second, String genreSong){
+    public void addSongToPool(String title, String band,String date, int minute,int second, String songGenre){
         Time durationTime = new Time(minute,second);
-        Genre songGenre = Genre.valueOf(genreSong);
         boolean space = false;
         for(int i=0; i<MAX_POOL_SONG && !space; i++){
             if(poolSong[i] == null){
@@ -72,7 +74,28 @@ public class Mcs{
             }
 
         }
+        
 }
+
+public User findUser(String userName){
+    User objSearch=null;
+    boolean findUs=false;
+    for (int i=0;i<MAX_USER && !findUs;i++){
+        if (user[i]!=null && user[i].getUserName().equalsIgnoreCase(userName)){
+            objSearch=user[i];
+            findUs=true;	
+        }
+    }
+    return objSearch;
+}
+
+public void updateRank(String name,int shareSong){
+    User objsearch = findUser(name); //Solucionar el contador 
+    objsearch.setCategory(shareSong);
+
+
+}
+
     public String showSong(){
         String out1 ="";
         for (int i=0; i<MAX_POOL_SONG; i++){
@@ -82,4 +105,45 @@ public class Mcs{
     }		
     return out1;
 }
+
+public boolean hasPlaylist() {
+    return numSong < MAX_PLAYLIST;
+   }
+
+   public void createPlaylist(String name, double score){
+    boolean space = false;
+    for(int i=0; i<MAX_PLAYLIST&& !space; i++){
+        if(playlistSong[i] == null){
+            playlistSong[i] = new Public(name,score);
+            space = true;
+            numPlaylist++;
+        }
+
+    }
+}
+//*********************************************************
+public void createPlaylist(String name,String creatorUser){
+    boolean space = false;
+    for(int i=0; i<MAX_PLAYLIST&& !space; i++){
+        if(playlistSong[i] == null){
+            playlistSong[i] = new Restricted(name);
+            space = true;
+            numPlaylist++;
+        }
+
+    }
+}
+//**********************************************************
+public void createPlaylist(String name){
+    boolean space = false;
+    for(int i=0; i<MAX_PLAYLIST&& !space; i++){
+        if(playlistSong[i] == null){
+            playlistSong[i] = new Private(name);
+            space = true;
+            numPlaylist++;
+        }
+
+    }
+}
+
 }

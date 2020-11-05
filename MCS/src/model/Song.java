@@ -51,10 +51,18 @@ public class Song{
         this.band = band;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getDate() {
         return date;
     }
    
+    
+    /** 
+     * @param date
+     */
     public void setDate(String date) {
         this.date = date;
     }

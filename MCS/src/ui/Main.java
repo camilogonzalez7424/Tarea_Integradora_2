@@ -170,12 +170,11 @@ public class Main {
 			
 			reader.nextLine();
 			String name = "";
-			int shareSong = 0;
 
 			System.out.println("Ingrese el nombre del usuario que añade la canción compartida");
 			name = reader.nextLine();
 			
-			mcs.updateRank(name, shareSong);
+			mcs.updateRank(name);
 			System.out.println("La canción \""+ title +"\" ha sido añadida con éxito\n");
 		}
 		else{

@@ -1,5 +1,12 @@
 package model;
 
+/**
+ * Case study for the Algorithms and programming course
+ * @author Camilo G.
+ * @since november 2020
+ * @version 1.0
+ */
+
 public class Mcs{
     public final static int MAX_USER = 10; //Constant maximo de usuarios.
     public final static int MAX_POOL_SONG = 30; //Constant maximo de canciones.
@@ -59,10 +66,23 @@ public class Mcs{
          return out;
         }
 
+         
+         /** 
+          * @return boolean
+          */
          public boolean hasSong() {
              return numSong < MAX_POOL_SONG;
             }
 
+    
+    /** 
+     * @param title
+     * @param band
+     * @param date
+     * @param minute
+     * @param second
+     * @param songGenre
+     */
     public void addSongToPool(String title, String band,String date, int minute,int second, String songGenre){
         Time durationTime = new Time(minute,second);
         boolean space = false;
@@ -77,6 +97,11 @@ public class Mcs{
         
 }
 
+
+/** 
+ * @param userName
+ * @return User
+ */
 public User findUser(String userName){
     User objSearch=null;
     boolean findUs=false;
@@ -86,16 +111,36 @@ public User findUser(String userName){
             findUs=true;	
         }
     }
+    objSearch.setShareSong(objSearch.getShareSong()+1);
     return objSearch;
 }
 
-public void updateRank(String name,int shareSong){
-    User objsearch = findUser(name); //Solucionar el contador 
-    objsearch.setCategory(shareSong);
 
+/** 
+ * @param name
+ */
+public void updateRank(String name){
+    User objsearch = findUser(name); 
+
+    if(objsearch.getShareSong() >=3 && objsearch.getShareSong() < 10){
+
+        objsearch.setType(objsearch.convert("LITTLE_CONTRIBUTOR"));
+
+    }else if(objsearch.getShareSong() >= 10 && objsearch.getShareSong() < 30){
+
+        objsearch.setType(objsearch.convert("MILD_CONTRIBUTOR"));
+
+    }else if(objsearch.getShareSong() >= 30) {
+
+        objsearch.setType(objsearch.convert("STAR_CONTRIBUTOR"));
+    }
 
 }
 
+    
+    /** 
+     * @return String
+     */
     public String showSong(){
         String out1 ="";
         for (int i=0; i<MAX_POOL_SONG; i++){
@@ -106,10 +151,19 @@ public void updateRank(String name,int shareSong){
     return out1;
 }
 
+
+/** 
+ * @return boolean
+ */
 public boolean hasPlaylist() {
     return numSong < MAX_PLAYLIST;
    }
 
+   
+   /** 
+    * @param name
+    * @param score
+    */
    public void createPlaylist(String name, double score){
     boolean space = false;
     for(int i=0; i<MAX_PLAYLIST&& !space; i++){
@@ -121,6 +175,11 @@ public boolean hasPlaylist() {
 
     }
 }
+
+/** 
+ * @param name
+ * @param creatorUser
+ */
 //*********************************************************
 public void createPlaylist(String name,String creatorUser){
     boolean space = false;
@@ -133,6 +192,10 @@ public void createPlaylist(String name,String creatorUser){
 
     }
 }
+
+/** 
+ * @param name
+ */
 //**********************************************************
 public void createPlaylist(String name){
     boolean space = false;

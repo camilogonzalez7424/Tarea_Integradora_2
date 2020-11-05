@@ -22,20 +22,6 @@ public class User{
 
     }
 
-    //actualiza la categoria de un usuario
-   public void setCategory(int shareSong){
-        if(shareSong>=3){
-            this.type= Category.LITTLE_CONTRIBUTOR;
-        }
-        if(shareSong>=10){
-            this.type= Category.MILD_CONTRIBUTOR;
-        }
-
-        if(shareSong>=30){
-            this.type= Category.STAR_CONTRIBUTOR;
-        }
-    }
-    
     /** 
      * @return String
      */
@@ -88,15 +74,49 @@ public class User{
         this.age = age;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getShareSong(){
        return shareSong;
     }
 
+    
+    /** 
+     * @param shareSong
+     */
     public void setShareSong(int shareSong){
         this.shareSong = shareSong;
     }
 
     
+    /** 
+     * @return Category
+     */
+    public Category getType() {
+        return type;
+    }
+
+    
+    /** 
+     * @param type
+     */
+    public void setType(Category type) {
+        this.type = type;
+    }
+
+    
+    
+    /** 
+     * @param type
+     * @return Category
+     */
+    public Category convert(String type){
+        Category myUserType = Category.valueOf(type);
+        return myUserType;
+
+    }
     /** 
      * @return String
      */
@@ -107,13 +127,6 @@ public class User{
         "Category: "+ type + "\n"+
         "******************\n";
 	}
-
-
-
-
-
-
-
 
 
 }

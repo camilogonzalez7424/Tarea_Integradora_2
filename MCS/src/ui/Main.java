@@ -3,6 +3,7 @@ package ui;
 import java.util.Scanner;
 
 import model.Mcs;
+import model.User;
 
 public class Main {
 	
@@ -42,7 +43,8 @@ public class Main {
 				"(4) Para mostrar las canciones\n" +  
 				"(5) Para crear playlist\n"+
 				"(6) Para agregar canciones a la playlist\n"+
-				"(7) Para mostrar las playlist\n"+
+				"(7) Para calificar una playlist publica\n"+
+				"(8) Para mostrar las playlist\n"+
 				"(0) Para salir"
 				);
 		option= reader.nextInt();
@@ -71,10 +73,22 @@ public class Main {
 			System.out.println(mcs.showSong());
 			break;
 		case 5:
+			createPlaylist();
 			break;
 		case 6:
+			addPlaylist();
 			break;
 		case 7:
+		System.out.println("Las playlist disponibles son: ");
+		System.out.println(mcs.showPlaylists());
+		System.out.println("Ingrese el nombre de la playlist PUBLICA: ");
+		String namePlaylist = reader.nextLine();
+		System.out.println("Califique de 1 a 10 la playlist: ");
+		double score = reader.nextDouble();
+		mcs.scorePublicPlaylist(score, namePlaylist);
+			break;	
+		case 8:
+			System.out.println(mcs.showPlaylists());
 			break;			
 		default:
 			System.out.println("Error, opción no válida");
@@ -95,10 +109,10 @@ public class Main {
 
 			mcs.createUser(userName, password, age);
 
-			System.out.println("El usuario \""+ userName +"\" ha sido creado con éxito\n");
+			System.out.println("El usuario \""+ userName +"\" ha sido creado con éxito :D \n");
 		}
 		else{
-			System.out.println("No puede crearse el usuario porque se llegó al límite");
+			System.out.println("No puede crearse el usuario porque se llegó al límite :( ");
 		}
 	
 	}
@@ -115,6 +129,15 @@ public class Main {
 		second = 0;
 
 		if(mcs.hasSong()){
+			System.out.println(mcs.showUser());
+//reader.nextLine();
+			String name = "";
+
+			System.out.println("Ingrese el nombre del usuario que añade la canción compartida");
+			name = reader.nextLine();
+			
+			mcs.updateRank(name);
+
 			System.out.println("Ingrese el titulo de la canción por favor:");
 			title = reader.nextLine();
 			System.out.println("Ingrese la banda o el artista de la canción: "+ title);
@@ -167,58 +190,87 @@ public class Main {
 		}
 
 			mcs.addSongToPool(title, band, date, minute, second, songGenre);	
-			
-			reader.nextLine();
-			String name = "";
-
-			System.out.println("Ingrese el nombre del usuario que añade la canción compartida");
-			name = reader.nextLine();
-			
-			mcs.updateRank(name);
-			System.out.println("La canción \""+ title +"\" ha sido añadida con éxito\n");
+		
+			System.out.println("La canción \""+ title +"\" ha sido añadida con éxito :D \n");
 		}
 		else{
-			System.out.println("No puede crearse la canción porque se llegó al límite");
+			System.out.println("No puede crearse la canción porque se llegó al límite :( ");
 		}
 	
 	}
 
 	private void createPlaylist(){
-		int length, numplay;
+		int numplay;
 		String name;
-		String [] restricted=new String[5];
-		double score =0;
+		User [] restricted = new User[5];
+		//double score =0;
+		String nameRestricted;
 		System.out.println("Digite la información de la playlist, por favor");
 		System.out.println("Escriba el nombre de la playlist");
 		name = reader.nextLine();
-		System.out.println("Seleccione el número que respresenta el tipo de playlist\n"+
+		System.out.println("Seleccione el número que respresenta el tipo de playlist:\n"+
 		"*******************Playlist tipo:******************** \n"+
-		"(1) Si la playlist es privada\n");
+		"(1) Si la playlist es publica\n"+
+		"(2) Si la playlist es restringida\n"+
+		"(3) Si la playlist es privada\n");
 		numplay = reader.nextInt();
 		reader.nextLine(); 
 		switch(numplay) {
-		case 1:
-			//System.out.println("Usuario que la crea");
-			//String nameprivate = reader.nextLine();
-			mcs.createPlaylist(name);
+		case 1:		
+			if(mcs.hasPlaylist()){
+				mcs.createPlaylist(name);
+				System.out.println("La playlist publica: \""+ name +"\" ha sido creada con éxito :D \n");
+
+			}else{
+				System.out.println("Numero máximo de playlists alcanzado");
+			}
 			break;
 		case 2:
-		
-		mcs.createPlaylist(name, score);
+		if(mcs.hasPlaylist()){	
+			for(int i = 0; i<5; i++){
+				System.out.println("Escriba el nombre de los usuarios: ");
+				nameRestricted = reader.nextLine();
+				restricted[i] = mcs.findUser(nameRestricted);
+
+			}
 			
+			mcs.createPlaylist(name,restricted);
+			
+			System.out.println("La playlist restringida: \""+ name +"\" ha sido creada con éxito :D \n");
+		}else{
+				System.out.println("Numero máximo de playlists alcanzado");
+			}
 			break;
 		case 3:
-			/*String[] resuser = new String[5];
-			for(int i = 0; i<5; i++){
-				System.out.println("Write user name");
-				String namerestricted = reader.nextLine();
-			}
-			mcs.createPlaylist(name, creatorUser);;
-			*/
+			if(mcs.hasPlaylist()){
+				System.out.println("Desde que usuario desea crear esta playlist");
+				System.out.println(mcs.showUser());
+				System.out.println("Ingrese el nombre del usuario que la crea: ");
+				String userName = reader.nextLine();
+				mcs.createPlaylist(name, mcs.findUser(userName));
+				System.out.println("La playlist privada: \""+ name +"\" ha sido creada con éxito :D \n");
+
+	}else{
+			System.out.println("Numero máximo de playlists alcanzado");
+		}
 			break;
 		default:
 			System.out.println("Error, opción no válida");
 		}
+	}
+
+	public void addPlaylist(){
+		String songName,playlistName;
+		System.out.println("Las canciones disponibles son: ");
+		System.out.println(mcs.showSong());
+		System.out.println("Ingrese el nombre de la canción que desea añadir: ");
+		songName = reader.nextLine();
+		System.out.println("Las playlist disponibles son: ");
+		System.out.println(mcs.showPlaylists());
+		System.out.println("Ingrese el nombre de la playlist donde añadira la canción: ");
+		playlistName = reader.nextLine();
+
+		mcs.addSongToPLaylist(songName, playlistName);
 	}
 
 		}

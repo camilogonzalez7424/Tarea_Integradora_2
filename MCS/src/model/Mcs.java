@@ -1,10 +1,9 @@
 package model;
 
 /**
- * Case study for the Algorithms and programming course
- * @author Camilo G.
- * @since november 2020
- * @version 1.0
+ * Created by Camilo González
+ * @since october 2020
+ * @version 2.0
  */
 
 public class Mcs{
@@ -111,16 +110,40 @@ public User findUser(String userName){
             findUs=true;	
         }
     }
-    objSearch.setShareSong(objSearch.getShareSong()+1);
+   // objSearch.setShareSong(objSearch.getShareSong()+1);
     return objSearch;
 }
 
+public Song findSong(String songName){
+    Song objSearch=null;
+    boolean findUs=false;
+    for (int i=0;i<MAX_POOL_SONG && !findUs;i++){
+        if (poolSong[i]!=null && poolSong[i].getTitle().equalsIgnoreCase(songName)){
+            objSearch=poolSong[i];
+            findUs=true;	
+        }
+    }
+    return objSearch;
+}
+
+public Playlist findPlaylist(String playlistName){
+    Playlist objSearch=null;
+    boolean findUs=false;
+    for (int i=0;i<MAX_PLAYLIST && !findUs;i++){
+        if (playlistSong[i]!=null && playlistSong[i].getName().equalsIgnoreCase(playlistName)){
+            objSearch=playlistSong[i];
+            findUs=true;	
+        }
+    }
+    return objSearch;
+}
 
 /** 
  * @param name
  */
 public void updateRank(String name){
     User objsearch = findUser(name); 
+    objsearch.setShareSong(objsearch.getShareSong()+1);
 
     if(objsearch.getShareSong() >=3 && objsearch.getShareSong() < 10){
 
@@ -164,11 +187,11 @@ public boolean hasPlaylist() {
     * @param name
     * @param score
     */
-   public void createPlaylist(String name, double score){
+   public void createPlaylist(String name){
     boolean space = false;
     for(int i=0; i<MAX_PLAYLIST&& !space; i++){
         if(playlistSong[i] == null){
-            playlistSong[i] = new Public(name,score);
+            playlistSong[i] = new Public(name);
             space = true;
             numPlaylist++;
         }
@@ -181,11 +204,11 @@ public boolean hasPlaylist() {
  * @param creatorUser
  */
 //*********************************************************
-public void createPlaylist(String name,String creatorUser){
+public void createPlaylist(String name, User[] myUser){
     boolean space = false;
     for(int i=0; i<MAX_PLAYLIST&& !space; i++){
         if(playlistSong[i] == null){
-            playlistSong[i] = new Restricted(name);
+            playlistSong[i] = new Restricted(name,myUser);
             space = true;
             numPlaylist++;
         }
@@ -197,16 +220,50 @@ public void createPlaylist(String name,String creatorUser){
  * @param name
  */
 //**********************************************************
-public void createPlaylist(String name){
+public void createPlaylist(String name,User myUser){
     boolean space = false;
     for(int i=0; i<MAX_PLAYLIST&& !space; i++){
         if(playlistSong[i] == null){
-            playlistSong[i] = new Private(name);
+            playlistSong[i] = new Private(name,myUser);
             space = true;
             numPlaylist++;
         }
 
     }
+}
+public String showPlaylists(){
+    String out = "";
+    for(int i = 0; i<MAX_PLAYLIST; i++){
+        if(playlistSong[i] != null){
+           // playlistSong[i].changeGenrePlaylist(playlistAllGenre);
+           // playlistSong[i].timeToFormat(playlistSong[i].updateDuration());
+            out += playlistSong[i].playlistToString();
+        }
+        
+    }
+    
+    return out;
+}
+public void addSongToPLaylist(String mySong, String myPlaylist){
+  Song objectSong = findSong(mySong);
+  Playlist objecPlaylist = findPlaylist(myPlaylist);
+  if(objectSong !=null){
+    objecPlaylist.setPlaylistDuration(objectSong.getDurationTime());
+ }
+  objecPlaylist.addFromPool(objectSong);
+}
+
+public void scorePublicPlaylist(double score, String namePlaylist){
+    Playlist objecPlaylist = findPlaylist(namePlaylist);
+    if(objecPlaylist!=null){
+           if(objecPlaylist instanceof Public){
+               Public scorePlaylist=(Public)objecPlaylist;
+
+               scorePlaylist.setScore(score);
+           }
+       }
+    
+
 }
 
 }

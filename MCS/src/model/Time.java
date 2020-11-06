@@ -49,5 +49,11 @@ public class Time{
       */
      public String toString(){
 		return minute +":"+second;
-	}
+    }
+    
+    public int timeToSeconds(){
+        int totalSeconds = 0;
+        totalSeconds = (minute*60)+second;
+        return totalSeconds;
+    }
 }

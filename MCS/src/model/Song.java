@@ -86,7 +86,7 @@ public class Song{
     /** 
      * @return songGenre
      */
-    public Genre getSonGenre() {
+    public Genre getSongGenre() {
         return songGenre;
     }
 
@@ -98,12 +98,18 @@ public class Song{
         this.songGenre = songGenre;
     }
 
+    public int songDurationSong(){
+        int durationInSeconds = getDurationTime().timeToSeconds();
+        return durationInSeconds;
+    }
+
     public String toString(){
 		return "****** Song ******\n"+
 		"Title: "+ title + "\n"+
         "Artist: "+ band + "\n"+
         "Duration: "+ durationTime.toString() + "\n"+
-		"Genre: "+ getSonGenre() + "\n";
+        "Genre: "+ songGenre+"\n"+
+        "******************\n";
 	}
 
 }

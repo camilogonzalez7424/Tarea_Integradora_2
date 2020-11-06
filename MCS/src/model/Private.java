@@ -6,7 +6,7 @@ public class Private extends Playlist{
     private User myUser;
 
     //Constructor
-    public Private(String name) {
+    public Private(String name, User myUser) {
         super(name);
         this.myUser = myUser;
     }
@@ -21,5 +21,16 @@ public class Private extends Playlist{
         this.myUser = myUser;
     }
 
-    
+    @Override
+    public String playlistToString(){
+        String out = "";
+        out ="********** Private Playlist **********\n"+
+             "** Title: "+getName()+"\n"+
+             "** Duration:"+ timeToFormat(updateDuration()) +"\n"+
+             "** Genre:"+ changeGenrePlaylist(playlistAllGenre()) +"\n"+
+             "** User: "+myUser.getUserName()+"\n"+
+             "******************************\n";
+
+            return out;
+        }   
 }

@@ -3,22 +3,38 @@ package model;
 /**
  * Created by Camilo González
  * @since october 2020
- * @version 2.0
+ * @version 1.0
  */
 
 public class Mcs{
-    public final static int MAX_USER = 10; //Constant maximo de usuarios.
-    public final static int MAX_POOL_SONG = 30; //Constant maximo de canciones.
-    public final static int MAX_PLAYLIST = 20; //Constant maximo de playlist.
+    public final static int MAX_USER = 10; //Constant of maximum users.
+    public final static int MAX_POOL_SONG = 30; //Constant of maximum songs.
+    public final static int MAX_PLAYLIST = 20; //Constant of maximum playlist.
 
-    private User[] user; //Array de usuario.
-    private Song[] poolSong; //Array de canciones.
-    private Playlist[] playlistSong; //Array de playlist.
+    //Attributes
+    private int numUsers;  //Variable to validate the maximum number of users. 
+    private int numSong;  //Variable to validate the maximum number of songs.
+    private int numPlaylist; //Variable to validate the maximum number of playlists.
 
-   private int numUsers;  //Variable para validar el maximo de usuarios. 
-   private int numSong;  //Variable para validar el maximo de canciones.
-   private int numPlaylist; //Variable para validar el maximo de playlist.
+    //Relationship.
+    private User[] user; //User arrays.
+    private Song[] poolSong; //Song arrays.
+    private Playlist[] playlistSong; //Playlist arrays.
 
+    //Constructor
+    
+     /**
+	 * Constructor method of the mcs class.
+     * 
+     * the user arrays and 
+     * an attribute to keep track of the users in the application is initialized.
+     * 
+     * the song arrays 
+     * and an attribute to keep track of the songs in the application is initialized.
+     * 
+     * the playlist arrays and 
+     * an attribute to keep track of the playlists in the application is initialized.
+	 */
     public Mcs(){
 
         user = new User[MAX_USER];
@@ -26,6 +42,7 @@ public class Mcs{
         playlistSong = new Playlist[MAX_PLAYLIST];
        numUsers = 0;
        numSong = 0;
+       numPlaylist = 0;
         }
         
         /** 
@@ -75,12 +92,13 @@ public class Mcs{
 
     
     /** 
-     * @param title
-     * @param band
-     * @param date
-     * @param minute
-     * @param second
-     * @param songGenre
+     * This method
+     * @param title , type String
+     * @param band , type String
+     * @param date , type String 
+     * @param minute , type int
+     * @param second , type int
+     * @param songGenre type String
      */
     public void addSongToPool(String title, String band,String date, int minute,int second, String songGenre){
         Time durationTime = new Time(minute,second);
@@ -98,7 +116,7 @@ public class Mcs{
 
 
 /** 
- * @param userName
+ * @param userName , type String
  * @return User
  */
 public User findUser(String userName){
@@ -110,7 +128,6 @@ public User findUser(String userName){
             findUs=true;	
         }
     }
-   // objSearch.setShareSong(objSearch.getShareSong()+1);
     return objSearch;
 }
 
@@ -141,7 +158,7 @@ public Playlist findPlaylist(String playlistName){
 /** 
  * @param name
  */
-public void updateRank(String name){
+public void updateCategory(String name){
     User objsearch = findUser(name); 
     objsearch.setShareSong(objsearch.getShareSong()+1);
 
@@ -185,7 +202,6 @@ public boolean hasPlaylist() {
    
    /** 
     * @param name
-    * @param score
     */
    public void createPlaylist(String name){
     boolean space = false;
@@ -201,7 +217,7 @@ public boolean hasPlaylist() {
 
 /** 
  * @param name
- * @param creatorUser
+ * @param myUser
  */
 //*********************************************************
 public void createPlaylist(String name, User[] myUser){
@@ -235,8 +251,6 @@ public String showPlaylists(){
     String out = "";
     for(int i = 0; i<MAX_PLAYLIST; i++){
         if(playlistSong[i] != null){
-           // playlistSong[i].changeGenrePlaylist(playlistAllGenre);
-           // playlistSong[i].timeToFormat(playlistSong[i].updateDuration());
             out += playlistSong[i].playlistToString();
         }
         

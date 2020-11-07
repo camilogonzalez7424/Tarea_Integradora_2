@@ -1,7 +1,7 @@
 package model;
 
 public class Public extends Playlist{
-    public static final int CALIFICATION =10;
+    public static final int CALIFICATION =5;
 
     //Attributes
     private double[] score= new double[CALIFICATION];

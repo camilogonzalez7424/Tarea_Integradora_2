@@ -2,7 +2,7 @@ package model;
 
 public class Private extends Playlist{
 
-    //Attributes
+    //Relationship
     private User myUser;
 
     //Constructor

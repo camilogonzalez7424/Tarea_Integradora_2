@@ -1,12 +1,12 @@
 package model;
 
 public abstract class Playlist{
-    public final static int MAX_PLAYLIST = 30; //Constant
+    public final static int MAX_PLAYLIST = 20; //Constant
 
-    //attributes
+    //Attributes
     private String name;
 
-    //relationships 
+    //Relationships 
     private Genre playlistGenre;
     private Time playlistDuration;
     private Song[] songs;
@@ -55,6 +55,10 @@ public void setSongs(Song[] songs) {
     this.songs = songs;
 }
 
+
+/** 
+ * @param theSong
+ */
 public void addFromPool(Song theSong){
     boolean out=false;
     for(int i =0; i<MAX_PLAYLIST && out!=true; i++){
@@ -68,6 +72,10 @@ public void addFromPool(Song theSong){
 
 }
 
+
+/** 
+ * @return Genre[]
+ */
 public Genre[] playlistAllGenre(){
     Genre allSongsGenre[] = new Genre[MAX_PLAYLIST];
     
@@ -78,20 +86,23 @@ public Genre[] playlistAllGenre(){
         }
     return allSongsGenre;
 }
+
+/** 
+ * @param allSongsGenre
+ * @return String
+ */
 public String changeGenrePlaylist(Genre[] allSongsGenre){
     String out = "";
     boolean stop = false;
     if(allSongsGenre[0] == null){
         out = "UNKNOWN";
     }else{
-        //Gender pruve = null;
-        //int count = 0;
         for(int i = 0; i<MAX_PLAYLIST; i++){
             for(int j = 0; j<MAX_PLAYLIST-1 && !stop; j++){
                 if(i != j){
                     if(allSongsGenre[i] == allSongsGenre[j]){
                         allSongsGenre[i] = null;
-                        //count++;
+
                     }  
                 }  
             }     
@@ -105,6 +116,10 @@ public String changeGenrePlaylist(Genre[] allSongsGenre){
     return out;
 }
 
+
+/** 
+ * @return int
+ */
 public int updateDuration(){
     int newSecondsTotal = 0;
     for(int i = 0; i < MAX_PLAYLIST; i++){
@@ -115,6 +130,11 @@ public int updateDuration(){
     return newSecondsTotal;
 }
 
+
+/** 
+ * @param newSecondsTotal
+ * @return String
+ */
 public String timeToFormat(int newSecondsTotal){
     String out = "";
     int minutes = newSecondsTotal/60;
@@ -123,6 +143,11 @@ public String timeToFormat(int newSecondsTotal){
     return out;
 }
 
+
+/** 
+ * Method that prints all the information of a playlist.
+ * @return String
+ */
 public String playlistToString(){
     String out = "";
     out ="********** Playlist **********\n"+
@@ -133,24 +158,5 @@ public String playlistToString(){
 
     return out;
 }
-
-/*public String addSongtoplaylist(Song[] songs, User objuser){
-    String message = "";
-    boolean addSong = false;
-    for (int i= 0; i < Mcs.MAX_POOL_SONG && !addSong; i++){
-
-        if(songs[i] == null){
-            addSong = true;
-
-            songs[i] = objsong;
-            message = "Se añadio correctamente";
-        }
-    }
-
-    if(addSong == false){
-        message = "No se pudo crear la cancion en la playlist";
-    }
-    return message;
-}*/
 
 }

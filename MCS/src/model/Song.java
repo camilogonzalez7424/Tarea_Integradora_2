@@ -20,89 +20,60 @@ public class Song{
         this.songGenre = Genre.valueOf(songGenre);
     }
 
-    /** 
-     * @return String
-     */
+    
     public String getTitle() {
         return title;
     }
 
-    
-    /** 
-     * @param title
-     */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    
-    /** 
-     * @return String
-     */
     public String getBand() {
         return band;
     }
 
-    
-    /** 
-     * @param band
-     */
     public void setBand(String band) {
         this.band = band;
     }
 
-    
-    /** 
-     * @return String
-     */
     public String getDate() {
         return date;
     }
    
-    
-    /** 
-     * @param date
-     */
     public void setDate(String date) {
         this.date = date;
     }
     
-    /** 
-     * @return durationTime
-     */
     public Time getDurationTime() {
         return durationTime;
     }
 
-    
-    /** 
-     * @param durationTime
-     */
     public void setDurationTime(Time durationTime) {
         this.durationTime = durationTime;
     }
 
-    
-    /** 
-     * @return songGenre
-     */
     public Genre getSongGenre() {
         return songGenre;
     }
 
-    
-    /** 
-     * @param songGenre
-     */
     public void setSongGenre(Genre songGenre) {
         this.songGenre = songGenre;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int songDurationSong(){
         int durationInSeconds = getDurationTime().timeToSeconds();
         return durationInSeconds;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String toString(){
 		return "****** Song ******\n"+
 		"Title: "+ title + "\n"+

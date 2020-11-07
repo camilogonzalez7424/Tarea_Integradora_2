@@ -4,7 +4,7 @@ public class Restricted extends Playlist{
 
     public static final int ACCESS= 5;
 
-    //Attributes
+    //Relationship
     private User[] myUser1 = new User[ACCESS];
 
     //Constructor

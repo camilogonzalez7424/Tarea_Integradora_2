@@ -13,6 +13,11 @@ public abstract class Playlist{
 
 
     //Constructor
+
+    /**
+     * Generic playlist constructor. <br>
+     * @param name , name of the playlist
+     */
     public Playlist(String name) {
         this.name = name;
         this.playlistGenre = Genre.UNKNOWN;
@@ -57,7 +62,8 @@ public void setSongs(Song[] songs) {
 
 
 /** 
- * @param theSong
+ * this method receives the specific song and enters it in the song arrangement of the playlist. <br>
+ * @param theSong , type Song.
  */
 public void addFromPool(Song theSong){
     boolean out=false;
@@ -65,7 +71,6 @@ public void addFromPool(Song theSong){
         if(songs[i] ==null){
             songs[i]= theSong;
             out=true;
-            System.out.println("La cancion fue añadida exitosamente");
         }
 
     }
@@ -73,11 +78,13 @@ public void addFromPool(Song theSong){
 }
 
 
-/** 
- * @return Genre[]
- */
-public Genre[] playlistAllGenre(){
-    Genre allSongsGenre[] = new Genre[MAX_PLAYLIST];
+    /** 
+    * Method that returns an array with the genres of all the songs stored in the playlist
+    * pre:
+    * @return Gender[] arrangement with all genres of songs from the playlist
+    */
+    public Genre[] playlistAllGenre(){
+        Genre allSongsGenre[] = new Genre[MAX_PLAYLIST];
     
         for(int i = 0; i<MAX_PLAYLIST; i++){
             if(songs[i] != null){
@@ -87,21 +94,24 @@ public Genre[] playlistAllGenre(){
     return allSongsGenre;
 }
 
-/** 
- * @param allSongsGenre
- * @return String
- */
-public String changeGenrePlaylist(Genre[] allSongsGenre){
-    String out = "";
-    boolean stop = false;
-    if(allSongsGenre[0] == null){
-        out = "UNKNOWN";
-    }else{
-        for(int i = 0; i<MAX_PLAYLIST; i++){
-            for(int j = 0; j<MAX_PLAYLIST-1 && !stop; j++){
-                if(i != j){
-                    if(allSongsGenre[i] == allSongsGenre[j]){
-                        allSongsGenre[i] = null;
+    /** 
+     * Method that updates the genre of the playlist without repeating genres. <br>
+     * pre:
+     * pos:
+     * @param allSongsGenre genre arrangement of all songs in playlist
+     * @return String , with the genres without repeating from the playlist
+     */
+    public String changeGenrePlaylist(Genre[] allSongsGenre){
+        String out = "";
+        boolean stop = false;
+        if(allSongsGenre[0] == null){
+            out = "UNKNOWN";
+        }else{
+            for(int i = 0; i<MAX_PLAYLIST; i++){
+                for(int j = 0; j<MAX_PLAYLIST-1 && !stop; j++){
+                    if(i != j){
+                        if(allSongsGenre[i] == allSongsGenre[j]){
+                            allSongsGenre[i] = null;
 
                     }  
                 }  
@@ -117,9 +127,12 @@ public String changeGenrePlaylist(Genre[] allSongsGenre){
 }
 
 
-/** 
- * @return int
- */
+    /** 
+    * Method that updates the playlist time
+    * pre: song arrangement must be defined with at least one song
+    * pos:
+    * @return int , seconds of total playlist duration
+    */
 public int updateDuration(){
     int newSecondsTotal = 0;
     for(int i = 0; i < MAX_PLAYLIST; i++){
@@ -132,7 +145,8 @@ public int updateDuration(){
 
 
 /** 
- * @param newSecondsTotal
+ * method that receives the total of seconds and transforms them into minutes and seconds. <br>
+ * @param newSecondsTotal , type int.
  * @return String
  */
 public String timeToFormat(int newSecondsTotal){
@@ -153,8 +167,7 @@ public String playlistToString(){
     out ="********** Playlist **********\n"+
          "** Title: "+name+"\n"+
          "** Duration:"+ timeToFormat(updateDuration())+ "\n"+
-         "** Genre: "+ changeGenrePlaylist(playlistAllGenre()) + "\n"+
-         "******************************\n";
+         "** Genre: "+ changeGenrePlaylist(playlistAllGenre());
 
     return out;
 }

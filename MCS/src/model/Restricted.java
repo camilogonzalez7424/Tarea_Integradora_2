@@ -5,9 +5,15 @@ public class Restricted extends Playlist{
     public static final int ACCESS= 5;
 
     //Relationship
-    private User[] myUser1 = new User[ACCESS];
+    private User[] myUser1;
 
     //Constructor
+
+    /**
+     * Generic private playlist constructor.
+     * @param name , name of the playlist.
+     * @param myUser1 , name of the users.
+     */
     public Restricted(String name, User[] myUser1) {
         super(name);
         this.myUser1 = myUser1;
@@ -18,10 +24,14 @@ public class Restricted extends Playlist{
         return myUser1;
     }
 
-    public void setMyUser1(User[] myUser1) {
-        this.myUser1 = myUser1;
-    }
-
+    public void setMyUser1(User[] newUser1) {
+       this.myUser1 = newUser1;
+}
+    
+    /**
+     * This method concatenates the names of the creator users. <br>
+     * @return the names
+     */
     public String myUsersName(){
         String names="";
         for(int i=0; i<ACCESS; i++){
@@ -41,9 +51,7 @@ public class Restricted extends Playlist{
     public String playlistToString(){
         String out = "";
         out ="********** Restricted Playlist **********\n"+
-             "** Title: "+getName()+"\n"+
-             "** Duration:"+ timeToFormat(updateDuration()) +"\n"+
-             "** Genre:"+ changeGenrePlaylist(playlistAllGenre()) +"\n"+
+             super.playlistToString()+"\n"+
              "** User: "+myUsersName()+"\n"+
              "******************************\n";
 

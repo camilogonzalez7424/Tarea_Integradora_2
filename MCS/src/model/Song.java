@@ -12,6 +12,15 @@ public class Song{
     private Time durationTime;
     private Genre songGenre;
 
+
+    /**
+     * Generic song constructor.
+     * @param title , type String.
+     * @param band , type String.
+     * @param date , type String.
+     * @param durationTime , type Time.
+     * @param songGenre , type Genre.
+     */
     public Song(String title, String band,String date, Time durationTime, String songGenre) {
         this.title = title;
         this.band = band;
@@ -63,7 +72,9 @@ public class Song{
 
     
     /** 
-     * @return int
+     * This method receives all the time of the songs in seconds. <br>
+     * pre: there must be at least one song that is already transformed by the method timeToSeconds. <br>
+     * @return int seconds
      */
     public int songDurationSong(){
         int durationInSeconds = getDurationTime().timeToSeconds();
@@ -72,7 +83,8 @@ public class Song{
 
     
     /** 
-     * @return String
+     * This method show all song information. <br>
+     * @return String with the information.
      */
     public String toString(){
 		return "****** Song ******\n"+

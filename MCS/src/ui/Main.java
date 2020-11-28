@@ -3,15 +3,11 @@ package ui;
 import java.util.Scanner;
 
 import model.Mcs;
-import model.User; //Corregir en la segunda entrega *NO se puede tener esta dependencia.
-				   //Fatal el error :(
 
-/*Nota para el Camilo del futuro
-Organizar el acceso de los usuarios a la playlist*/
 public class Main {
 	
-	private static Scanner reader;
-	private static Mcs mcs;
+	private Scanner reader; 
+	private Mcs mcs;
 
 	public Main() {
 		mcs = new Mcs();
@@ -115,14 +111,14 @@ System.out.println("(((((((((((((((((((((((((((((((((((((((((((((((((\n"+
 			createPlaylist();
 			break;
 		case 6:
-			addPlaylist();
+			addSongToPlaylist();	
 			break;
 		case 7:
 		System.out.println("Las playlist disponibles son: ");
 		System.out.println(mcs.showPlaylists());
 		System.out.println("Ingrese el nombre de la playlist PUBLICA: ");
 		String namePlaylist = reader.nextLine();
-		System.out.println("Califique de 1 a 10 la playlist: ");
+		System.out.println("Califique de 1 a 5 la playlist: ");
 		double score = reader.nextDouble();
 		mcs.scorePublicPlaylist(score, namePlaylist);
 			break;	
@@ -241,9 +237,7 @@ System.out.println("(((((((((((((((((((((((((((((((((((((((((((((((((\n"+
 	private void createPlaylist(){
 		int numplay;
 		String name;
-		User [] restricted = new User[5];
-		//double score =0;
-		String nameRestricted;
+	
 		System.out.println("Digite la información de la playlist, por favor");
 		System.out.println("Escriba el nombre de la playlist");
 		name = reader.nextLine();
@@ -266,14 +260,15 @@ System.out.println("(((((((((((((((((((((((((((((((((((((((((((((((((\n"+
 			break;
 		case 2:
 		if(mcs.hasPlaylist()){	
-			for(int i = 0; i<5; i++){
-				System.out.println("Escriba el nombre de los usuarios: ");
-				nameRestricted = reader.nextLine();
-				restricted[i] = mcs.findUser(nameRestricted);
-
-			}
+			int [] indexRestricted = new int[5];
+			System.out.println(mcs.findUsers());
+			System.out.println("Ingrese los usuarios que tienen acceso a esta playlist");
+                            for(int i = 0; i<5; i++){
+                                indexRestricted[i] = reader.nextInt()-1;
+                            }
+                            mcs.createPlaylist(name, mcs.restrictedUserArray(indexRestricted));
 			
-			mcs.createPlaylist(name,restricted);
+			
 			
 			System.out.println("La playlist restringida: \""+ name +"\" ha sido creada con éxito :D \n");
 		}else{
@@ -298,18 +293,66 @@ System.out.println("(((((((((((((((((((((((((((((((((((((((((((((((((\n"+
 		}
 	}
 
-	public void addPlaylist(){
+	public void addSongToPlaylist(){
 		String songName,playlistName;
-		System.out.println("Las canciones disponibles son: ");
-		System.out.println(mcs.showSong());
-		System.out.println("Ingrese el nombre de la canción que desea añadir: ");
-		songName = reader.nextLine();
-		System.out.println("Las playlist disponibles son: ");
-		System.out.println(mcs.showPlaylists());
-		System.out.println("Ingrese el nombre de la playlist donde añadira la canción: ");
-		playlistName = reader.nextLine();
+		String user = "";
+		int index;
+		System.out.println("Escoga el tipo de playlist: \n"+ 
+							"[1] Si es publica"+"\n"+
+							"[2] Si es restringida"+"\n"+
+							"[3] Si es privada");		
+		int election = reader.nextInt();
+		reader.nextLine();
+		switch(election){
+			case 1:
+				System.out.println("Las canciones disponibles son: ");
+				System.out.println(mcs.showSong());
+				System.out.println("Ingrese el nombre de la canción que desea añadir: ");
+				songName = reader.nextLine();
+				System.out.println("Las playlist disponibles son: ");
+				System.out.println(mcs.showPlaylists());
+				System.out.println("Ingrese el nombre de la playlist PUBLICA donde añadira la canción: ");
+				playlistName = reader.nextLine();
+				index = 0;
+				System.out.println(mcs.addSongToPLaylist(songName, playlistName,user,index));
 
-		mcs.addSongToPLaylist(songName, playlistName);
+			break;
+			case 2:
+				System.out.println("Las canciones disponibles son: ");
+				System.out.println(mcs.showSong());
+				System.out.println("Ingrese el nombre de la canción que desea añadir: ");
+				songName = reader.nextLine();
+				System.out.println("Las playlist disponibles son: ");
+				System.out.println(mcs.showPlaylists());
+				System.out.println("Ingrese el nombre de la playlist RESTRINGIDA donde añadira la canción: ");
+				playlistName = reader.nextLine();
+				System.out.println("Ingrese el numero del usuario que añade la canción"+"\n"+
+							"Tenga en cuenta que solo los creadores pueden añadir una canción ");
+				System.out.println(mcs.findUsers());			
+				index = reader.nextInt();
+				index=index-1;
+				System.out.println(mcs.addSongToPLaylist(songName, playlistName,user,index));
+
+			break;
+			case 3:
+				System.out.println("Las canciones disponibles son: ");
+				System.out.println(mcs.showSong());
+				System.out.println("Ingrese el nombre de la canción que desea añadir: ");
+				songName = reader.nextLine();
+				System.out.println("Las playlist disponibles son: ");
+				System.out.println(mcs.showPlaylists());
+				System.out.println("Ingrese el nombre de la playlist PRIVADA donde añadira la canción: ");
+				playlistName = reader.nextLine();
+				System.out.println("Ingrese el nombre del usuario que creo la playlist y añadira la canción ");
+				user = reader.nextLine();
+				index = 0;
+				System.out.println(mcs.addSongToPLaylist(songName, playlistName,user,index));
+			break;
+			default:
+			System.out.println("Error, opción no válida");
+		
+		}
+
 	}
 
 		}

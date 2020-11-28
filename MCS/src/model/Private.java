@@ -1,11 +1,17 @@
 package model;
 
 public class Private extends Playlist{
-
+    
     //Relationship
     private User myUser;
 
     //Constructor
+
+    /**
+     * Generic private playlist constructor.
+     * @param name , name of the playlist.
+     * @param myUser , name of the user.
+     */
     public Private(String name, User myUser) {
         super(name);
         this.myUser = myUser;
@@ -25,9 +31,7 @@ public class Private extends Playlist{
     public String playlistToString(){
         String out = "";
         out ="********** Private Playlist **********\n"+
-             "** Title: "+getName()+"\n"+
-             "** Duration:"+ timeToFormat(updateDuration()) +"\n"+
-             "** Genre:"+ changeGenrePlaylist(playlistAllGenre()) +"\n"+
+             super.playlistToString()+"\n"+
              "** User: "+myUser.getUserName()+"\n"+
              "******************************\n";
 
